@@ -14,12 +14,12 @@ class FactoryArticles extends Model
         'delivery_time',
         
     ];
-    public function factoryArticle():BelongsTo
+    public function factoryArticle()
     {
-        return $this->belongsTo(related:Factory:: class);
+        return $this->belongsTo(Factory:: class);
     }
 
-    public function article(): BelongsTo
+    public function article()
     {
     return $this->belongsTo(related: Article::class);
     }

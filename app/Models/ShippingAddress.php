@@ -19,12 +19,12 @@ class ShippingAddress extends Model
 
 
     ];
-    public function customer(): BelongsTo
+    public function customer()
     {
         return $this->belongsTo(related:customer::class);
     
     }
-    public function order(): HasMany
+    public function order()
     {
         return $this->hasMany(related: order::class);
     }

@@ -21,6 +21,7 @@ public function articleFactories():HasMany
 
 }
 public function orderLines(): HasMany
+
 {
     return $this->hasMany(related: OrderLine::class);
 }

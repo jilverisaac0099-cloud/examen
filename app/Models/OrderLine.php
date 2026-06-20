@@ -13,11 +13,11 @@ class OrderLine extends Model
         'unite_price',
         'subtotal',
     ];
-    public function order():Belongsto
+    public function order()
     {
         return $this->belongsTo(related: Order::class);
     }
-    public function article(): Belongsto
+    public function article()
     {
         return $this->belongsTo(related:Article::class);
     }

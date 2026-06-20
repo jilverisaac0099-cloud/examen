@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class factorI extends Model
+class Factory extends Model
 {
     protected $fillable = [
         'company_name',
@@ -15,7 +15,7 @@ class factorI extends Model
         'address',
         'supplier_status',
     ];
-    public function factory (): HasMany
+    public function factory ()
     {
         return $this->hasMany(related: FactoryArticles:: class);
 }

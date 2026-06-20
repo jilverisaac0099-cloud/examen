@@ -20,7 +20,7 @@ class Customer extends Model
     public function shippingAddress (): Hasmany
 
     {
-        return $this->hasMany(related:shippingAddress);
+        return $this->hasMany(related:ShippingAddress);
     }
     public function order(): HasMany
     {
