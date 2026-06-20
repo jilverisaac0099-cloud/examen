@@ -17,12 +17,9 @@ class Customer extends Model
         'registration_date',
         'customer_status'
     ];
-    public function shippingAddress (): Hasmany
 
-    {
-        return $this->hasMany(related:ShippingAddress);
-    }
-    public function order(): HasMany
+    
+    public function order()
     {
         return $this->hasMany(related:order::class);
     }

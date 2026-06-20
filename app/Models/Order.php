@@ -17,11 +17,11 @@ class Order extends Model
         'order_status',
 
     ];
-    public function customer(): BelongsTo
+    public function customer()
     {
         return $this->belongsTo(related: customer::class);
     }
-    public function shippingAddress():BelongsTo
+    public function shippingAddress()
     {
         return $this->belongsTo(related:shippingAddress::class);
     }

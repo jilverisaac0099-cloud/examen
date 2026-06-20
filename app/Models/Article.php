@@ -15,12 +15,12 @@ class Article extends Model
         'available_status',
         'entry_date',
     ];
-public function articleFactories():HasMany
+public function articleFactories()
 {
     return $this->hasMany(related: FactoryArticles::class);
 
 }
-public function orderLines(): HasMany
+public function orderLines()
 
 {
     return $this->hasMany(related: OrderLine::class);
