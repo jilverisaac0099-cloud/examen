@@ -53,7 +53,7 @@ class CostumerRequest extends FormRequest
             'discount.numeric' => 'El descuento solo permite números',
             'discount.required' => 'El descuento es requerido',
 
-            'registration_date.date' => 'Debe ser una fecha válida',
+            'registration_date.date' => 'Debe ser una fecha de registro válida',
             'registration_date.required' => 'La fecha de registro es requerida',
 
             'customer_status.string' => 'El estado de cliente solo permite caracteres',
