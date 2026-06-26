@@ -12,20 +12,20 @@ class ShippingAddress extends Model
         'customer_id',
         'number',
         'street',
-        'neghborhood',
+        'neighborhood',
         'city',
         'reference_location',
-        'adress_status',
+        'address_status',
 
 
     ];
     public function customer()
     {
-        return $this->belongsTo(related:customer::class);
+        return $this->belongsTo(customer::class);
     
     }
     public function order()
     {
-        return $this->hasMany(related: order::class);
+        return $this->hasMany( order::class);
     }
 }

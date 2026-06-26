@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Factory;
+use App\Models\Article;
 
 class FactoryArticles extends Model
 {
@@ -14,13 +16,14 @@ class FactoryArticles extends Model
         'delivery_time',
         
     ];
-    public function factoryArticle()
+    public function factoryArticles()
     {
-        return $this->belongsTo(Factory:: class);
+        return $this->belongsTo( Factory::class);
     }
 
     public function article()
     {
-    return $this->belongsTo(related: Article::class);
+        return $this->belongsTo( Article::class);
     }
+
 }

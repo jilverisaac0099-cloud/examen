@@ -17,9 +17,8 @@ return new class extends Migration
             $table->decimal('negotiated_cost');
             $table->integer('delivery_time');
             
-            $table->integer('articles_id')->unsigned();
-            $table->foreigh('articles_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            $table->integer('factories_id')->unsigned();
+            $table->foreigh('factories_id')->references('id')->on('factories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
