@@ -49,7 +49,7 @@ class ShippingAddressRequest extends FormRequest
             'city.min' => 'El minimo de caracteres es 3',
             'city.max' => 'El máximo de caracteres es 255',
 
-            'reference_location' => 'La referencia solo permite caracteres',
+            'reference_location.string' => 'La referencia solo permite caracteres',
             'reference_location.required' => 'La referencia es requerida',
             'reference_location.min' => 'El mínimo de caracteres es 3',
             'reference_location.max' => 'El máximo de caracteres es 25',
