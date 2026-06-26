@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('date_time_creation');
+            $table->timestamp('date_creation');
             $table->decimal('subtotal',10,2);
             $table->decimal('iva');
             $table->decimal('grand_total');

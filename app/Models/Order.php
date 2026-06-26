@@ -10,9 +10,10 @@ class Order extends Model
 {
     protected $fillable =[
         
-        'date_time_creation',
+        'date_creation',
         'subtotal',
         'iba',
+        'grand_total',
         'additional_note',
         'order_status',
 
