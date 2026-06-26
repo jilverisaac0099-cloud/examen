@@ -13,6 +13,7 @@ class FactoryArticles extends Model
         'factory_id',
         'article_id',
         'current_stock',
+        'negotiated_cost',
         'delivery_time',
         
     ];
