@@ -7,7 +7,7 @@ use App\Http\Requests\OrderRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class OrderController extends Controller
+class OrderController
 {
     public function index(): View
     {
