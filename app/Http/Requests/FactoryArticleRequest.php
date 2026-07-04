@@ -19,7 +19,7 @@ class FactoryArticleRequest extends FormRequest
             'id_article' => 'integer|required',
             'current_stock' => 'numeric|required',
             'negotiated_cost' => 'numeric|required',
-            '' => 'string|required|min:3|max:50',
+            'delivery_time' => 'string|required|min:3|max:50',
         ];
     }
 
