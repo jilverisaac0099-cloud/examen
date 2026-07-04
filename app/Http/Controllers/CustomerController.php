@@ -12,7 +12,7 @@ class CustomerController
      */
     public function index()
     {
-        $customers = Customer::orderByDesc('id')->paginate(20);
+        $customers = Customer::orderByDesc('id')->get();
         return view('customers.index', compact('customers'));
     }
 
@@ -21,7 +21,9 @@ class CustomerController
      */
     public function create()
     {
-        return view('customers.create');
+       $customer =new customer();
+        return view('customer.create', compact('customer'));
+
     }
 
     /**
@@ -36,16 +38,18 @@ class CustomerController
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show(string $id)
     {
+        $customer = Customer::findOrFail($id);
         return view('customers.show', compact('customer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Customer $customer)
+    public function edit(string $id)
     {
+        $customer = Customer::findOrFail($id);
         return view('customers.edit', compact('customer'));
     }
 
@@ -61,8 +65,9 @@ class CustomerController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer)
+    public function destroy(string $id)
     {
+        $customer = Customer::findOrFail($id);
         $customer->delete();
         return redirect()->route('customers.index')->with('success', 'El cliente se ha eliminado correctamente.');
     }
