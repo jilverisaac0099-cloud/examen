@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FactoryArticles;
-use App\Http\Requests\FactoryArticlesRequest;
+use App\Http\Requests\FactoryArticleRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -54,6 +54,7 @@ class FactoryArticleController
         $factoryArticle->delete();
 
         return redirect()->route('factory-articles.index')
-            ->with('success', 'Relacion fabrica-articulo eliminada correctamente.');
+            ->with('success', 'Relacion fabrica articulo eliminada correctamente.');
     }
 }
+
