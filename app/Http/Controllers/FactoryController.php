@@ -11,13 +11,14 @@ class FactoryController
 {
     public function index(): View
     {
-        $factories = Factory::all();
+        $factories = Factory::orderByDesc ('id')->get();
 
         return view('factories.index', compact('factories'));
     }
 
     public function create(): View
     {
+        $factories = Factory::orderByDesc ('id')->get();
         return view('factories.create');
     }
 
@@ -25,13 +26,12 @@ class FactoryController
     {
         Factory::create($request->validated());
 
-        return redirect()->route('factories.index')
-            ->with('success', 'Fabrica creada correctamente.');
+        return redirect()->route('factories.index')->with('success', 'Fabrica creada correctamente.');
     }
 
     public function show(Factory $factory): View
     {
-        $factory = Factory::with('articles')->findOrFail($factory->id);
+        $factory = Factory::findOrFail($id);
 
         return view('factories.show', compact('factory'));
     }
@@ -39,17 +39,14 @@ class FactoryController
     public function edit(string $id): View
     {
         $factory = Factory::findOrFail($id);
-
         return view('factories.edit', compact('factory'));
     }
 
-    public function update(FactoryRequest $request, string $id): RedirectResponse
+    public function update(FactoryRequest $request, Factory $factory)
     {
-        $factory = Factory::findOrFail($id);
         $factory->update($request->validated());
 
-        return redirect()->route('factories.index')
-            ->with('success', 'Fabrica actualizada correctamente.');
+        return redirect()->route('factories.index') ->with('success', 'Fabrica creada correctamente.');
     }
 
     public function destroy(string $id): RedirectResponse
