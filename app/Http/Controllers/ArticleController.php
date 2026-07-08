@@ -11,27 +11,27 @@ class ArticleController
 {
     public function index(): View
     {
-        $articles = Article::all();
+        $articles = Article::orderByDesc('id')->get();
 
         return view('articles.index', compact('articles'));
     }
 
     public function create(): View
     {
-        return view('articles.create');
+        $article = new Article();
+        return view('articles.create', compact('article'));
     }
 
-    public function store(ArticleRequest $request): RedirectResponse
+    public function store(ArticleRequest $request)
     {
         Article::create($request->validated());
 
-        return redirect()->route('articles.index')
-            ->with('success', 'Articulo creado correctamente.');
+        return redirect()->route('articles.index')->with('success', 'Articulo creado correctamente.');
     }
 
     public function show(Article $article): View
     {
-        $article = Article::with('factories')->findOrFail($article->id);
+        $article = Article::findOrFail($id);
 
         return view('articles.show', compact('article'));
     }
@@ -48,8 +48,7 @@ class ArticleController
         $article = Article::findOrFail($id);
         $article->update($request->validated());
 
-        return redirect()->route('articles.index')
-            ->with('success', 'Articulo actualizado correctamente.');
+        return redirect()->route('articles.index') ->with('success', 'Articulo creada correctamente.');
     }
 
     public function destroy(string $id): RedirectResponse
