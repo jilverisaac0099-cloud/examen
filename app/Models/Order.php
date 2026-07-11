@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     protected $fillable =[
-        
+        'customer_id',
+        'shipping_address_id',
         'date_creation',
         'subtotal',
         'iba',
@@ -26,5 +27,5 @@ class Order extends Model
     {
         return $this->belongsTo(shippingAddress::class);
     }
-    
+
     }

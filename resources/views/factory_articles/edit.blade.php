@@ -2,9 +2,9 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-100 leading-tight tracking-tight">
-                {{ __('Editar linea de pedido') }}
+                {{ __('Editar articulo de la fabrica') }}
             </h2>
-            <a href="{{ route('orders.index') }}" class="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors font-medium">
+            <a href="{{ route('factory_articles.index') }}" class="text-sm text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors font-medium">
                 &larr; Volver a la linea de pedido
             </a>
         </div>
@@ -14,35 +14,36 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-2xl border border-gray-100 dark:border-gray-700 p-8">
 
-                <form action="{{ route('orders.update', $order_line) }}" method="POST" onsubmit="confirmarActualizacion(event)" novalidate>
+                <form action="{{ route('factory_articles.update', $factory_article) }}" method="POST" onsubmit="confirmarActualizacion(event)" novalidate>
                     @csrf
                     @method('PUT')
 
                     <div class="mb-6">
-                        <label for="request_quantity" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">cantidad solicitada</label>
-                        <input type="number" id="request_quantity" name="request_quantity" value="{{ old('date_creation', $order_line->request_quantity) }}" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors">
-                        @error('request_quantity')
+                        <label for="current_stock" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">existencias actuales</label>
+                        <input type="text" id="current_stock" name="current_stock" value="{{ old('current_stock', $factory_article->current_stock) }}" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors">
+                        @error('current_stock')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
+
                     <div class="mb-6">
-                        <label for="unite_price" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subtotal</label>
-                        <input type="number" id="unite_price" name="unite_price" value="{{ old('subtotal', $order_line->unite_price) }}" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors">
-                        @error('unite_price')
+                        <label for="factory" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">fabrica</label>
+                        <textarea id="factory" name="factory" rows="4" maxlength="100" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors" placeholder="fabrica...">{{ old('factory', $factory_article->factory) }}</textarea>
+                        @error('factory')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
-                  
-                    <div class="mb-6">
-                        <label for="order" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">pedido</label>
-                        <textarea id="order" name="order" rows="4" maxlength="100" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors" placeholder="Nombre del cliente...">{{ old('customer', $order_line->order) }}</textarea>
-                        @error('customer')
+                    </div>
+                     <div class="mb-6">
+                        <label for="delivery_time" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">existencias actuales</label>
+                        <input type="text" id="delivery_time" name="delivery_time" value="{{ old('delivery_time', $factory_article->delivery_time) }}" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors">
+                        @error('delivery_time)
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-6">
                         <label for="article" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">articulo</label>
-                        <textarea id="article" name="article" rows="4" maxlength="100" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors" placeholder="Dirección de envío...">{{ old('shipping_address', $order_line->articulo) }}</textarea>
-                        @error('shipping_address')
+                        <textarea id="article" name="article" rows="4" maxlength="100" class="w-full rounded-xl border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors" placeholder="articulo...">{{ old('article', $factory_article->article) }}</textarea>
+                        @error('article')
                             <p class="mt-2 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>

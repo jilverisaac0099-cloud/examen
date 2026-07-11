@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\relations\BelongsTo;
 class OrderLine extends Model
 {
     protected $fillable =[
+        'order_id',
+        'article_id',
         'request_quantity',
         'unite_price',
         'subtotal',
