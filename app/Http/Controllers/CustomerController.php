@@ -21,7 +21,7 @@ class CustomerController
      */
     public function create()
     {
-       $customer =new customer();
+    $customer =new customer();
         return view('customer.create', compact('customer'));
 
     }
