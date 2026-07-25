@@ -9,7 +9,7 @@ class Article extends Model
 {
     protected $fillable = [
         'internal_code',
-        'detailed_descrption',
+        'detailed_description',
         'price',
         'cost',
         'available_status',

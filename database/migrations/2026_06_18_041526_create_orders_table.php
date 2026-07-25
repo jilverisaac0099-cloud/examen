@@ -15,15 +15,13 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamp('date_creation');
             $table->decimal('subtotal',10,2);
-            $table->decimal('iva');
+            $table->decimal('iba');
             $table->decimal('grand_total');
             $table->string('additional_note');
             $table->string('order_status');
-
-         
-            $table->integer('shipping_addresses_id')->unsigned();
-            $table->foreigh('shipping_addresses_id')->references('id')->on('shipping_addresses')->onDelete('cascade')->onUpdate('cascade');
         
+            $table->foreign('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
             $table->timestamps();
         });

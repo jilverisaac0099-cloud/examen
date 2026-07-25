@@ -28,7 +28,12 @@
                     </x-nav-link>
                     <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
                         {{ __('pedidos') }}
-                    
+                    </x-nav-link>
+                    <x-nav-link :href="route('factoryarticles.index')" :active="request()->routeIs('factoryarticles.*')">
+                        {{ __('articulos de fabrica') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('shippingaddresses.index')" :active="request()->routeIs('shipingaddresses.*')">
+                        {{ __('direccion') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -92,11 +97,26 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
-                {{ __('Categorías') }}
+            <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                {{ __('cliente') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.*')">
-                {{ __('Notas') }}
+            <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
+                {{ __('Articulo') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('factories.index')" :active="request()->routeIs('factories.*')">
+                {{ __('fabrica') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('factoryarticles.index')" :active="request()->routeIs('factoryarticles.*')">
+                {{ __('Articulo de fabrica') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')">
+                {{ __('pedido') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('shippingaddresses.index')" :active="request()->routeIs('shippingaddresses.*')">
+                {{ __('direccion') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('orderlines.index')" :active="request()->routeIs('orderlines.*')">
+                {{ __('linea de pedido') }}
             </x-responsive-nav-link>
         </div>
 

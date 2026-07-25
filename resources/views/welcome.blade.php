@@ -46,7 +46,7 @@
                 </h1>
 
                 <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
-                    Sistema centralizado para la administración de categorías y apuntes de manera eficiente, estructurado bajo una interfaz moderna y adaptativa.
+                    Sistema centralizado para la administración de fabrica y apuntes de manera eficiente, estructurado bajo una interfaz moderna y adaptativa.
                 </p>
 
                 @if (Route::has('login'))

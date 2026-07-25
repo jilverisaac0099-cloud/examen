@@ -1,74 +1,95 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-2xl text-gray-800 leading-tight tracking-tight">
-                {{ __('Ver linea de pedido') }}
+            <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-100 leading-tight tracking-tight">
+                {{ __('ver linea de pedidos') }}
             </h2>
-            <a href="{{ route('order_lines.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-xl font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-sm">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                Volver a la lista
+            <a href="{{ route('order_line.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 shadow-lg shadow-indigo-500/30">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Nueva linea de pedido
             </a>
         </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-2xl border border-gray-100 p-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-2xl border border-gray-100 dark:border-gray-700">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50/50 dark:bg-gray-900/50 border-b border-gray-100 dark:border-gray-700">
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider w-16">#</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Título</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Categoría</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            @forelse ($order_lines as $order_line)
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <span class="text-sm font-mono text-gray-400 dark:text-gray-500">{{ $factory_article->id }}</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">
+                                            {{ $order_line->request_quantity ?? 'Sin stock actual' }}
+                                        </div>
+                                    </td>
 
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Nombre del pedido</h3>
-                    <p class="text-lg font-semibold text-gray-900">{{ $order->d }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Estado del pedido</h3>
-                    <p class="text-lg font-semibold text-gray-900">{{ $order->order_status }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Cliente</h3>
-                    <p class="text-lg font-semibold text-gray-900">{{ $order->customer }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Dirección de envío</h3>
-                    <p class ="text-lg font-semibold text-gray-900">{{ $order->shipping_address }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">subTotal</h3>
-                    <p class="text-lg font-semibold text-gray-900">{{ $order->subtotal }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Total</h3>
-                    <p class="text-lg font-semibold text-gray-900">{{ $order->grand_total }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Descuento</h3>
-                    <p class="text-lg font-semibold text-gray-900">{{ $order->additional_note }}</p>
-                </div>
-                <div class="mb-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">iba</h3>
-                    <p class="text  -lg font-semibold text-gray-900">{{ $order->iba }}</p>
-                </div>
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">
+                                            {{ $order_line->unite_price ?? 'Sin costo de negociación' }}
+                                        </div>
+                                    </td>
 
-                <div class="mt-8 border-t border-gray-100 pt-6">
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Descripción</h3>
-                    <div class="text-gray-700 bg-gray-50 p-4 rounded-xl border border-gray-100 min-h-[100px]">
-                        {{ $order->description ?? 'Este pedido no tiene descripción registrada.' }}
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">
+                                            {{ $order_line->subtotal ?? 'Sin subtotal' }}
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                                            {{ $factory_article->article->name ?? 'Sin categoría' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex justify-end items-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <a href="{{ route('factory_articles.show', $factory_article) }}" class="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title="Ver">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                            </a>
+                                            <a href="{{ route('factory_articles.edit', $factory_article) }}" class="text-gray-400 hover:text-amber-500 transition-colors" title="Editar">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                            </a>
+                                            <form action="{{ route('factory_articles.destroy', $factory_article) }}" method="POST" class="inline" id="form-delete-{{ $factory_article->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" onclick="confirmarEliminacion({{ $factory_article->id }})" class="text-gray-400 hover:text-red-500 transition-colors" title="Eliminar">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-6 py-12 text-center">
+                                        <div class="flex flex-col items-center">
+                                            <svg class="w-12 h-12 text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            <p class="text-gray-500 dark:text-gray-400 text-lg font-medium">No hay artículos de fábrica registrados</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                
+                @if(isset($order_line) && method_exists($order_lines, 'hasPages') && $order_lines->hasPages())
+                    <div class="px-6 py-4 border-t border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50">
+                        {{ $order_lines->links() }}
                     </div>
-                </div>
-
-                <div class="flex items-center justify-end gap-4 mt-8 pt-6 border-t border-gray-100">
-                    <form action="{{ route('orders.destroy', $order) }}" method="POST" class="inline" id="form-delete-{{ $order->id }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" onclick="confirmarEliminacion({{ $order->id }})" class="inline-flex items-center px-4 py-2 bg-white border border-red-200 rounded-xl font-semibold text-xs text-red-600 uppercase tracking-widest shadow-sm hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                            Eliminar
-                        </button>
-                    </form>
-
-                    <a href="{{ route('orders.edit', $order) }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-xl font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 transition ease-in-out duration-150 shadow-lg shadow-indigo-500/30">
-                        Editar Pedido
-                    </a>
-                </div>
-
+                @endif
             </div>
         </div>
     </div>
@@ -97,3 +118,4 @@
         }
     </script>
 </x-app-layout>
+

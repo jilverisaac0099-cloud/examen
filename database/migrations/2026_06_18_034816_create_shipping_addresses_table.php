@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('neighborhood', 40 );
             $table->string('city', 30);
             $table->string('reference_location',40);
+            $table->string('address_status');
+            
             $table->foreign('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
