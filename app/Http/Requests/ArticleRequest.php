@@ -7,49 +7,60 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ArticleRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'internal_code' => 'string|required|min:3|max:50',
-            'detailed_description' => 'string|required|min:3|max:255',
-            'price' => 'numeric|required',
-            'cost' => 'numeric|required',
-            'availabe_status' => 'string|required|min:3|max:20',
-            'entry_status' => 'date|required',
+            'code_internal'=>"string|required||min:4|max:20",
+            'description'=>"string|required||min:3|max:50",
+            'price'=>"required",
+            'cost'=>"required",
+            'state'=>"string|required||min:3|max:30",
+            'date_record'=>"date|required",
         ];
     }
 
-    public function messages(): array
+    public function messages():array
     {
-        return [
-            'internal_code.string' => 'El codigo interno solo permite caracteres',
-            'internal_code.required' => 'El codigo interno es requerido',
-            'internal_code.min' => 'El minino de caracteres es 3',
-            'internal_code.max' => 'El máximo de caracteres es 50',
+        return[
+            'code_internal.string'=>'El campo solo permite caracteres',
+            'code_internal.required'=>'El campo es requerido',
+            'code_internal.min'=>'El minimo de caractesres es 4',
+            'code_internal.max'=>'El maximo de caracteres es 20',
 
-            'detailed_description.string' => 'La descripción detallada solo permite caracteres',
-            'detailed_descrption' => 'La descripcion de tallada  es requerido',
-            'detailed_description.min' => 'El mínimo de caracteres es 3',
-            'detailed_description.max' => 'El máximo de caracteres es 255',
+            'description.string'=>'La descripcion solo permite caracteres',
+            'description.required'=>'El campo es requerido',
+            'min.integer'=>'El minimo de caractesres es 3',
+            'max.integer'=>'El maximo de caracteres es 50',
 
-            'price.numeric' => 'El precio solo permite números',
-            'price.required' => 'El precio es requerido',
+        
+            'price.required'=>'El campo es requerido',
 
-            'cost.numeric' => 'El costo solo permite números',
-            'cost.required' => 'El costo es requerido',
+        
+            'cost.required'=>'El campo es requerido',
 
-            'available_status.string' => 'El estado solo permite caracteres',
-            'available_status.required' => 'El estado es requerido',
-            'available_status.min' => 'El mínimo de caracteres es 3',
-            'available_status.max' => 'El máximo de caracteres es 20',
+            'state.string'=>'El estado solo permite caracteres',
+            'state.required'=>'El campo es requerido',
+            'state.min'=>'El minimo de caractesres es 3',
+            'state.max'=>'El maximo de caracteres es 30',
 
-            'entry_status.date' => 'Debe ser un estado de entrada válida',
-            'entry_status.required' => 'El estado de entrada es requerida',
+            'date_record.date'=>'El campo solo permite fecha de ingreso',
+            'date_record.required'=>'El campo es requerido',
+            
+
         ];
     }
 }
+

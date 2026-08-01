@@ -5,43 +5,47 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class FactoryArticleRequest extends FormRequest
+class Factory_articleRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'id_factory' => 'integer|required',
-            'id_article' => 'integer|required',
-            'current_stock' => 'numeric|required',
-            'negotiated_cost' => 'numeric|required',
-            'delivery_time' => 'string|required|min:3|max:50',
+            'article_id'=>"required",
+            'current_stock'=>'integer|required|unsigned',
+            'negotiation_cost'=>'integer|required|unsigned',
+            'date_estimated'=>"date|required|",
         ];
     }
 
-    public function messages(): array
+    public function messages():array
     {
-        return [
-            'id_factory.integer' => 'El id de fábrica solo permite números enteros',
-            'id_factory.required' => 'El id de la fabrica es requerido',
+        return[
+            
+            'article_id.required'=>'El campo es requerido',
+            'current_stock.integer'=>'El campo solo permite numeros enteros',
+            'current_stock.required'=>'El campo es requerido',
+            'current_stock.unsigned'=>'El campo solo permite numeros enteros',
 
-            'id_article.integer' => 'El id de artículo solo permite números enteros',
-            'id_article.required' => 'El id del articulo es requerido',
+            'negotiation_cost.integer'=>'El costo de negociacion solo permite numeros enteros',
+            'negotiation_cost.required'=>'El campo es requerido',
+            'negotiation_cost.unsigned'=>'El campo solo permite numeros enteros',
 
-            'current_stock' => 'Las existencias solo permiten números',
-            'current_stock.required' => 'Las existencias es requerido',
+            'date_estimated.date'=>'El campo solo permite fecha estimada',
+            'date_estimated.required'=>'El campo es requerido'
 
-            'negotiated_cost.numeric' => 'El costo solo permite números',
-            'negotiated_cost.required' => 'El costo es requerido',
-
-            'delivery_time.string' => 'El tiempo de entrega solo permite caracteres',
-            'delivery_time.required' => 'El tiempo de entrega es requerido',
-            'delivery_time.min' => 'El mínimo de caracteres es 3',
-            'delivery_time.max' => 'El máximo de caracteres es 50',
         ];
     }
 }

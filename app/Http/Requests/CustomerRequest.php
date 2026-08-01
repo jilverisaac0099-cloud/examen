@@ -7,59 +7,73 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CustomerRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'name' => 'string|required|min:3|max:255',
-            'email' => 'string|required|email|max:255',
-            'telephone' => 'string|required|min:7|max:255',
-            'balance' => 'numeric|required',
-            'credit_limit' => 'numeric|required',
-            'discount' => 'numeric|required',
-            'registration_date' => 'date|required',
-            'customer_status' => 'string|required|min:3|max:20',
+            'name'=>'string|required|min:3|max:20',
+            'email'=>'string|required|min:3|max:30|unique:customers,email,' . $this->route('customers'),
+            'telephone'=>'integer|required|unique:customers,telephone,' . $this->route('customers'),
+            'balance'=>'required',
+            'credit_limit'=>'required',
+            'discount'=>'string|required|min:1|max:25',
+            'date_record'=>'date|required',
+            'state_customer'=>'string|required|min:3|max:30',
         ];
     }
 
-    public function messages(): array
+    public function messages():array
+
     {
-        return [
-            'name.string' => 'El nombre solo permite caracteres',
-            'name.required' => 'El nombre es requerido',
-            'name.min' => 'El mínimo de caracteres es 3',
-            'name.max' => 'El maximo de caracteres es 255',
+        return[
 
-            'email.string' => 'El correo electronico solo permite caracteres',
-            'email.required' => 'El correo electronico es requerido',
-            'email' => 'Debe ser un correo electronico válido',
-            'email.max' => 'El máximo de caracteres es 255',
+            'name.string'=>'El nombre solo permite caracteres',
+            'name.required'=>'El campo es requerido',
+            'name.min'=>'El minimo de caracteres es 3',
+            'name.max'=>'El maximo de caracteres es 20',
 
-            'telephone.string' => 'El teléfono solo permite caracteres',
-            'telephone.required' => 'El telefono es requerido',
-            'telephone.min' => 'El mínimo de caracteres es 7',
-            'telephone.max' => 'El máximo de caracteres es 255',
+            'email.string'=>'El correo solo permite caracteres',
+            'email.required'=>'El campo es requerido',
+            'email.min'=>'El minimo de caractesres es 3',
+            'email.max'=>'El maximo de caracteres es 30',
 
-            'balance.numeric' => 'El saldo solo permite números',
-            'balance.required' => 'El saldo es requerido',
+            'telephone.integer'=>'El campo solo permite numeros enteros',
+            'telephone.required'=>'El campo es requerido',
+            'telephone.unique'=>'El numero debe ser unico',
 
-            'credit_limit.numeric' => 'El límite de crédito solo permite números',
-            'credi_limit' => 'El limite de credito es requerido',
+            
+            'balance.required'=>'El balance es requerido',
 
-            'discount.numeric' => 'El descuento solo permite números',
-            'discount.required' => 'El descuento es requerido',
 
-            'registration_date.date' => 'Debe ser una fecha de registro válida',
-            'registration_date.required' => 'La fecha de registro es requerida',
+            'credit_limit.required'=>'El Límite de crédito es requerido',
 
-            'customer_status.string' => 'El estado de cliente solo permite caracteres',
-            'customer_status.required' => 'El estado de cliente es requerido',
-            'customer_status.min' => 'El mínimo de caracteres es 3',
-            'customer_status.max' => 'El máximo de caracteres es 20',
+            'discount.string'=>'El campo descuento solo permite caracteres',
+            'discount.required'=>'El campo es requerido',
+            'discount.min'=>'El minimo de caracteres es 1',
+            'discount.max'=>'El maximo de caracteres es 25',
+
+            'date_record.date'=>'El campo solo permite fecha de ingreso',
+            'date_record.required'=>'El campo es requerido',
+            'date.date'=>'fecha',
+
+            'state_customer.string'=>'El campo solo permite caracteres',
+            'state_customer.required'=>'El campo es requerido',
+            'state_customer.min'=>'El minimo de caractesres es 3',
+            'state_customer.max'=>'El maximo de caracteres es 30',
+
+            
         ];
     }
 }

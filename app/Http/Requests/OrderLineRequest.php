@@ -5,37 +5,47 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderLineRequest extends FormRequest
+class Order_lineRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'id_article' => 'integer|required',
-            'request_quantity' => 'integer|required',
-            'unite_price' => 'numeric|required',
-            'subtotal' => 'numeric|required',
+            'article_id'=>"required",
+            'quantity'=>'integer|required|unsigned',
+            'price'=>"decimal|required",
+            'subtotal_line'=>"decimal|required",
         ];
     }
 
-    public function messages(): array
+    public function messages():array
     {
-        return [
-            'id_Article.integer' => 'El id de artículo solo permite números enteros',
-            'id_Article.required' => 'El articulo es requerido',
+        return[
+            
+            'article_id.required'=>'El campo es requerido',
 
-            'request_quantity.integer' => 'La cantidad solicitada solo permite números enteros',
-            'request_quantity.required' => 'La cantidad solicitada es requerida',
+            'quantity.integer'=>'El campo solo permite numeros enteros',
+            'quantity.required'=>'El campo es requerido',
+            'quantity.unsigned'=>'El campo solo permite numeros enteros',
 
-            'unite_price.numeric' => 'El precio unitario solo permite números',
-            'unite_price.required' => 'El precio unitario es requerido',
+            'price.decimal'=>'El campo permite numeros',
+            'price.required'=>'El campo es requerido',
 
-            'subtotal.numeric' => 'El subtotal solo permite números',
-            'subtotal.required' => 'El subtotal es requerido',
+            'subtotal_line.decimal'=>'El campo permite numeros',
+            'subtotal_line.required'=>'El campo es requerido',
+            
         ];
     }
 }

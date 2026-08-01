@@ -7,55 +7,65 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class FactoryRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'name' => 'string|required|min:3|max:150',
-            'identification_number' => 'string|required|min:3|max:50',
-            'telephone' => 'string|required|min:7|max:20',
-            'email' => 'string|required|email|max:25',
-            'address' => 'string|required|min:3|max:25',
-            'supplier_status' => 'string|required|min:3|max:20',
+            'company_name'=>'string|required|min:3|max:30',
+            'identification_card'=>'string|required|min:3|max:30|unique:factories,identification_card,' . $this->route('factories'),
+            'telephone'=>'integer|required|unique:factories,telephone,' . $this->route('factories'),
+            'email'=>'string|required|min:3|max:20|unique:factories,email,' . $this->route('factories'),
+            'address'=>'string|required|min:3|max:40',
+            'state_supplier'=>'string|required|min:3|max:50',
         ];
     }
 
-    public function messages(): array
+    public function messages():array
     {
-        return [
-            'name.string' => 'El nombre solo permite caracteres',
-            'name.required' => 'El nombre es requerido',
-            'name.min' => 'El minimo de caracateres es 3',
-            'name.max' => 'El máximo de caracteres es 150',
+        return[
 
-            'identification_number.string' => 'El numero de identificación solo permite caracteres',
-            'identification_number.required' => 'El numero de identificacion es requerido',
-            'identification_number.min' => 'el minimo de caracteres es 3',
-            'identification_number.max' => 'El máximo de caracteres es 50',
+            'company_name.string'=>'El nombre de la compañia solo permite caracteres',
+            'company_name.required'=>'El campo es requerido',
+            'company_name.min'=>'El mínimo de caracteres es 3',
+            'company_name.max'=>'El maximo de caracteres es 30',
 
-            'telephone.string' => 'El telefono solo permite caracteres',
-            'telephone.required' => 'El telefono es requerido',
-            'telephone.min' => 'El mínimo de caracteres es 7',
-            'telephone.max' => 'El máximo de caracteres es 20',
+            'identification_card.string'=>'La cedula de identidad solo permite caracteres',
+            'identification_card.required'=>'El campo es requerido',
+            'identification_card.min'=>'El mínimo de caracteres es 3',
+            'identification_card.max'=>'El maximo de caracteres es 30',
 
-            'email.string' => 'El correo electronico solo permite caracteres',
-            'email.required' => 'El correo electronico es requerido',
-            'email.email' => 'Debe ser un correo válido',
-            'email.max' => 'El máximo de caracteres es 25',
+            'telephone.integer'=>'El campo solo permite numeros enteros',
+            'telephone.required'=>'El campo es requerido',
+            'telephone.unique'=>'El numero debe ser unico',
 
-            'address.string' => 'La direccion solo permite caracteres',
-            'address.required' => 'La direccion es requerido',
-            'address.min' => 'El minimo de caracteres es 3',
-            'address.max' => 'El maximo de caracteres es 25',
+            'email.string'=>'El correo solo permite caracteres',
+            'email.required'=>'El campo es requerido',
+            'email.min'=>'El minimo de caracteres es 3',
+            'email.max'=>'El maximo de caracteres es 20',
 
-            'supplier_status.string' => 'El estado de cliente solo permite caracteres',
-            'supplier_status.required' => 'El estaspo del cliente es requerido',
-            'supplier_status.min' => 'El minimo de caracteres es 3',
-            'supplier_status.max' => 'El maximo de caracteres es 20',
+            'address.string'=>'La direccion solo permite caracteres',
+            'address.required'=>'El campo es requerido',
+            'address.min'=>'El minimo de caractesres es 3',
+            'address.max'=>'El maximo de caracteres es 40',
+
+            'state_supplier.string'=>'El campo solo permite caracteres',
+            'state_supplier.required'=>'El campo es requerido',
+            'state_supplier.min'=>'El minimo de caracteres es 3',
+            'state_supplier.max'=>'El maximo de caracteres es 50',
+
+
         ];
     }
 }

@@ -7,53 +7,62 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class OrderRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
-            'id_customer' => 'integer|required',
-            'id_address' => 'integer|required',
-            'date_creation' => 'date|required',
-            'subtotal' => 'numeric|required',
-            'iba' => 'numeric|required',
-            'grand_total' => 'numeric|requerid',
-            'additional_note' => 'string|nullable|max:255',
-            'Order_status' => 'string|required|min:3|max:20',
+            'customer_id'=>"required",
+            'id_address_shipping'=>"required",
+            'date_create'=>"date|required",
+            'subtotal'=>"decimal|required",
+            'iva'=>"decimal|required",
+            'total_general'=>"decimal|required",
+            'additional_notes'=>"string|required|min:3|max:20",
+            'state_order'=>"string|required||min:3|max:20",
         ];
     }
 
-    public function messages(): array
+    public function messages():array
     {
-        return [
-            'id_costumer.integer' => 'El id de cliente solo permite números enteros',
-            'id_costumer.required' => 'El id de cliente es requerido',
+        return[
+            'customer_id.required'=>'El campo es requerido',
+            
+            'id_address_shipping.required'=>'El campo es requerido',
 
-            'id_address.integer' => 'El id de dirección solo permite números enteros',
-            'id_address.required' => 'El id de direcion es requerido',
+            'date_create.date'=>'El campo solo permite fecha de creacion',
+            'date_create.required'=>'El campo es requerido',
+            
+            'subtotal.decimal'=>'El campo permite números',
+            'subtotal.required'=>'El campo es requerido',
 
-            'date_creation.date' => 'Debe ser una fecha de creacion válida',
-            'date_creation.required' => 'La fecha de creacion es requerido',
+            'iva.decimal'=>'El campo permite numeros',
+            'iva.required'=>'El campo es requerido',
 
-            'subtotal.numeric' => 'El subtotal solo permite números',
-            'subtotal.required' => 'El subtotal es requerido',
+            'total_general.decimal'=>'El campo permite numeros',
+            'total_general.required'=>'El campo es requerido',
 
-            'iva.numeric' => 'El impuesto solo permite números',
-            'iva.required' => 'El impuesto es requerido',
+            'additional_notes.string'=>'las notas adicionales solo permite caracteres',
+            'additional_notes.required'=>'El campo es requerido',
+            'additional_notes.min'=>'El minimo de caractesres es 3',
+            'additional_notes.max'=>'El maximo de caracteres es 20',
 
-            'grand_total.numeric' => 'El total solo permite números',
-            'grand_total.required' => 'El campo es requerido',
+            'state_order.string'=>'las notas adicionales solo permite caracteres',
+            'state_order.required'=>'El campo es requerido',
+            'state_order.min'=>'El minimo de caractesres es 3',
+            'state_order.max'=>'El maximo de caracteres es 20',
 
-            'additional_note.string' => 'Las notas solo permiten caracteres',
-            'additional_note.max' => 'El máximo de caracteres es 255',
-
-            'Order_status' => 'El estado del pedido solo permite caracteres',
-            'order_status' => 'El estado del pedido es requerido',
-            'Order_status.min' => 'El mínimo de caracteres es 3',
-            'order_status.max' => 'El máximo de caracteres es 20',
         ];
     }
 }
