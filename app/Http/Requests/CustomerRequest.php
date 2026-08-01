@@ -46,7 +46,7 @@ class CustomerRequest extends FormRequest
 
             'email.string'=>'El correo solo permite caracteres',
             'email.required'=>'El campo es requerido',
-            'email.min'=>'El minimo de caractesres es 3',
+            'email.min'=>'El minimo de caracteres es 3',
             'email.max'=>'El maximo de caracteres es 30',
 
             'telephone.integer'=>'El campo solo permite numeros enteros',

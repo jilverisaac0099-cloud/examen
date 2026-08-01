@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Factory_article extends Model
 {
     protected $fillable=[
-        "id_article",
+        "article_id",
         "current_stock",
         "negotiation_cost",
         "date_estimated"

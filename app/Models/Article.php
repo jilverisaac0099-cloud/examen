@@ -25,4 +25,3 @@ class Article extends Model
         return $this->hasMany(Factory_article::class);
     }
 }
-
