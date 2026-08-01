@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_lines', function (Blueprint $table) {
+        Schema::create('order_line', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('requested_quantity');
-            $table->decimal('unite_price');
-            $table->decimal('subtotal');
+            $table->integer('quantity')->unsigned();
+            $table->decimal('price');
+            $table->decimal('subtotal_line',10,2);
 
             $table->integer('articles_id')->unsigned();
-            $table->foreigh('articles_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('articles_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

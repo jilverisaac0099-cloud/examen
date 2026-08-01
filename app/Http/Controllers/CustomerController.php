@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CustomerRequest;
+use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Http\Requests\CustomerRequest;
 
-class CustomerController
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $customers = Customer::orderByDesc('id')->get();
-        return view('customers.index', compact('customers'));
+        $customers = Customer::orderByDesc("id")->get();
+        return view("customers.index", compact("customers"));
     }
 
     /**
@@ -21,9 +22,8 @@ class CustomerController
      */
     public function create()
     {
-    $customer =new customer();
-        return view('customer.create', compact('customer'));
-
+        $customers = new Customer();
+        return view("customers.create", compact("customers"));
     }
 
     /**
@@ -32,7 +32,7 @@ class CustomerController
     public function store(CustomerRequest $request)
     {
         Customer::create($request->validated());
-        return redirect()->route('customers.index')->with('success', 'El cliente se ha creado correctamente.');
+        return redirect()->route("customers.index")->with("success", "El cliente se ha creado correctamente.");
     }
 
     /**
@@ -41,7 +41,7 @@ class CustomerController
     public function show(string $id)
     {
         $customer = Customer::findOrFail($id);
-        return view('customers.show', compact('customer'));
+        return view("customers.show", compact("customer"));
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomerController
     public function edit(string $id)
     {
         $customer = Customer::findOrFail($id);
-        return view('customers.edit', compact('customer'));
+        return view("customers.edit", compact("customer"));
     }
 
     /**
@@ -59,8 +59,9 @@ class CustomerController
     public function update(CustomerRequest $request, Customer $customer)
     {
         $customer->update($request->validated());
-        return redirect()->route('customers.index')->with('success', 'El cliente se ha actualizado correctamente.');
+        return redirect()->route("customers.index")->with("success", "El cliente se ha actualizado correctamente.");
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -69,6 +70,6 @@ class CustomerController
     {
         $customer = Customer::findOrFail($id);
         $customer->delete();
-        return redirect()->route('customers.index')->with('success', 'El cliente se ha eliminado correctamente.');
+        return redirect()->route("customers.index")->with("success", "El cliente se ha eliminado correctamente.");
     }
 }

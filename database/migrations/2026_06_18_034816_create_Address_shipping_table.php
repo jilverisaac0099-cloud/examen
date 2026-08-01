@@ -15,10 +15,10 @@ return new class extends Migration
             $table->increments('id');
             $table->decimal('number', 10,2);
             $table->string('street',20);
-            $table->string('neighborhood', 40 );
-            $table->string('city', 30);
-            $table->string('reference_location',40);
-            $table->string('address_status',30);
+            $table->string('neighborhood', 20 );
+            $table->string('city', 20);
+            $table->string('reference_location',30);
+            $table->string('state_address',30);
             
             $table->integer("customer_id")->unsigned();
             $table->foreign("customer_id")->references("id")->on("customers")->onDelete("cascade")->onUpdate("cascade");

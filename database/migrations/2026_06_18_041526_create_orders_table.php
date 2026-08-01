@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('date_creation');
+            $table->timestamp('date_create');
             $table->decimal('subtotal',10,2);
-            $table->decimal('iba');
-            $table->decimal('grand_total');
-            $table->string('additional_note');
-            $table->string('order_status');
+            $table->decimal('iva', 10,2);
+            $table->decimal('total_general', 10,2);
+            $table->string('additional_notes',30);
+            $table->string('state_order',20);
         
-            $table->foreign('customer_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
             $table->timestamps();

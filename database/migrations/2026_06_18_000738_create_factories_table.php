@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('factories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('company_name');
-            $table->string('identification_number')->unique();
+            $table->string('company_name',50);
+            $table->string('identification_card')->unique();
             $table->integer('telephone')->unique();
             $table->string('email')->unique();
-            $table->string('address');
-            $table->string('supplier_status');
+            $table->string('address', 30);
+            $table->string('state_supplier',30);
             $table->timestamps();
         });
     }

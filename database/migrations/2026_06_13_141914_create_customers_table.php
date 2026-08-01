@@ -1,6 +1,5 @@
 <?php
 
-use Faker\Guesser\Name;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name', 20);
             $table->string('email')->unique();
             $table->integer('telephone')->unique();
-            $table->decimal('balance');
-            $table->decimal('credit_limit');
-            $table->decimal('discount');
-            $table->datetime('registration_date');
-            $table->string('customer_status');
+            $table->decimal("balance", 10, 2);
+            $table->decimal("credit_limit", 10, 2);
+            $table->string("discount", 5);
+            $table->date("date_record");
+            $table->string("state_customer", 30);
 
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('customers');
     }
 };

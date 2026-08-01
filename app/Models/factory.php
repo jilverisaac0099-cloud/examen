@@ -3,20 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Factory extends Model
 {
-    protected $fillable = [
-        'company_name',
-        'identification_number',
-        'telephone',
-        'email',
-        'address',
-        'supplier_status',
+    protected $fillable=[
+        "company_name",
+        "identification_card",
+        "telephone",
+        "email",
+        "address",
+        "state_supplier"
     ];
-    public function factory ()
+
+    public function factory_article()
     {
-        return $this->hasMany(related: FactoryArticles:: class);
-}
+        return $this->belongsTo(Factory_article::class);
+    }
 }

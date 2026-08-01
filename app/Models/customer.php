@@ -3,23 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Customer extends Model
 {
-    protected $fillable = [
-        'name',
-        'email',
-        'telephone',
-        'balance',
-        'credit_limit',
-        'discount',
-        'registration_date',
-        'customer_status'
+    protected $fillable=[
+        "name",
+        "email",
+        "telephone",
+        "balance",
+        "credit_limit",
+        "discount",
+        "date_record",
+        "state_customer"
     ];
 
-    
-    public function customer()
+    public function address_shippings()
     {
-        return $this->hasMany(related:customer::class);
+        return $this->hasMany(Address_shipping::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

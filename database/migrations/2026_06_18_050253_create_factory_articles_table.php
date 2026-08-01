@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('factory_articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('current_stock');
-            $table->decimal('negotiated_cost');
-            $table->integer('delivery_time');
+            $table->integer('current_stock')->unsigned();
+            $table->decimal('negotiation_cost')->unsigned();
+            $table->integer('date_estimated');
             
-            $table->integer('factories_id')->unsigned();
-            $table->foreigh('factories_id')->references('id')->on('factories')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('article_id')->unsigned();
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

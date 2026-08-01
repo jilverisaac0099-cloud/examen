@@ -3,29 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    protected $fillable =[
-        'customer_id',
-        'shipping_address_id',
-        'date_creation',
-        'subtotal',
-        'iba',
-        'grand_total',
-        'additional_note',
-        'order_status',
-
+    protected $fillable=[
+        "id_customer",
+        "id_address_shipping",
+        "date_create",
+        "subtotal",
+        "iva",
+        "total_general",
+        "additional_notes",
+        "state-order"
     ];
+
     public function customer()
     {
-        return $this->belongsTo( customer::class);
-    }
-    public function shippingAddress()
-    {
-        return $this->belongsTo(shippingAddress::class);
+        return $this->belongsTo(Customer::class);
     }
 
+    public function address_shippings()
+    {
+        return $this->hasMany(Address_shipping::class);
     }
+}

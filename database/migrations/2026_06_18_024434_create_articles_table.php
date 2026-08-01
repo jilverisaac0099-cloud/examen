@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('internal_code')->unique();
-            $table->string('detailed_description');
-            $table->decimal('price',9,2);
-            $table->decimal('cost',9,2);
-            $table->string('available_status',40);
-            $table->datetime('entry_date');
+            $table->string('code_internal')->unique();
+            $table->string('description',100);
+            $table->decimal('price',10,2);
+            $table->decimal('cost',10,2);
+            $table->string('state',30);
+            $table->datetime('date_record');
 
             $table->timestamps();
         });
