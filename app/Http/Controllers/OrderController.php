@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Http\Requests\OrderRequest;
 use App\Models\Customer;
 use App\Models\Address_shipping;
-use illuminate\Http\RedirectResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -22,7 +22,6 @@ class OrderController extends Controller
         return view("orders.index", compact("orders"));
     }
     
-
     /**
      * Show the form for creating a new resource.
      */
@@ -30,8 +29,11 @@ class OrderController extends Controller
     {
         $order = new Order();
         $customers = Customer::all();
-        $address_shippings = Address_shipping::all();
-        return view('orders.create',compact('order','customers', 'address_shippings'));
+        
+        // CORRECCIÓN: Cambiado a $addresses para que coincida con la vista
+        $addresses = Address_shipping::all(); 
+        
+        return view('orders.create', compact('order', 'customers', 'addresses'));
     }
 
     /**
@@ -40,7 +42,9 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         Order::create($request->validated());
-        return redirect()->route('orders.index')->with('success', 'ordenes a sido creada correctamente.');
+        
+        // Mensaje con ortografía corregida
+        return redirect()->route('orders.index')->with('success', 'La orden ha sido creada correctamente.');
     }
 
     /**
@@ -59,8 +63,11 @@ class OrderController extends Controller
     {
         $order = Order::with('customer')->findOrFail($id);
         $customers = Customer::all();
-        $address_shippings = Address_shipping::all();
-        return view('orders.edit', compact('order', 'customers', 'address_shippings'));
+        
+        // CORRECCIÓN: Cambiado a $addresses para que coincida con la vista
+        $addresses = Address_shipping::all(); 
+        
+        return view('orders.edit', compact('order', 'customers', 'addresses'));
     }
 
     /**
@@ -70,10 +77,11 @@ class OrderController extends Controller
     {
         $order = Order::with('customer')->findOrFail($id);
         $order->update($request->validated());
-        return redirect()->route('orders.index')->with('success', 'ordenes a sido actualizada correctamente.');
+        
+        // Mensaje con ortografía corregida
+        return redirect()->route('orders.index')->with('success', 'La orden ha sido actualizada correctamente.');
     }
     
-
     /**
      * Remove the specified resource from storage.
      */
@@ -81,6 +89,8 @@ class OrderController extends Controller
     {
         $order = Order::with('customer')->findOrFail($id);
         $order->delete();
-        return redirect()->route('orders.index')->with('success', 'ordenes a sido eliminada correctamente.');
+        
+        // Mensaje con ortografía corregida
+        return redirect()->route('orders.index')->with('success', 'La orden ha sido eliminada correctamente.');
     }
 }

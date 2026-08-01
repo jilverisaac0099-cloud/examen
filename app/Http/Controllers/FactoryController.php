@@ -72,3 +72,4 @@ class FactoryController extends Controller
         return redirect()->route("factories.index")->with("success", "La fábrica se ha eliminado correctamente.");
     }
 }
+
