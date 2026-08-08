@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Factory;
 use App\Http\Requests\FactoryRequest;
+use App\Models\Factory;
 
 class FactoryController extends Controller
 {
@@ -13,6 +13,7 @@ class FactoryController extends Controller
      */
     public function index()
     {
+        // Corregido a mayúscula "Factory::"
         $factories = Factory::orderByDesc("id")->get();
         return view("factories.index", compact("factories"));
     }
@@ -32,7 +33,7 @@ class FactoryController extends Controller
     public function store(FactoryRequest $request)
     {
         Factory::create($request->validated());
-        return redirect()->route("factories.index")->with("success", "La fábrica se ha creado correctamente.");
+        return redirect()->route("factories.index")->with("success", "La fabrica se ha creado correctamente.");
     }
 
     /**
@@ -52,24 +53,16 @@ class FactoryController extends Controller
         $factory = Factory::findOrFail($id);
         return view("factories.edit", compact("factory"));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(FactoryRequest $request, Factory $factory)
+    public function update(FactoryRequest $request, Factory $factory) 
     {
         $factory->update($request->validated());
-        return redirect()->route("factories.index")->with("success", "La fábrica se ha actualizado correctamente.");
+        return redirect()->route("factories.index")->with("success", "La fabrica se ha actualizado correctamente.");
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
         $factory = Factory::findOrFail($id);
         $factory->delete();
-        return redirect()->route("factories.index")->with("success", "La fábrica se ha eliminado correctamente.");
+        return redirect()->route("factories.index")->with("success", "La fabrica se ha eliminado correctamente.");
     }
 }
-

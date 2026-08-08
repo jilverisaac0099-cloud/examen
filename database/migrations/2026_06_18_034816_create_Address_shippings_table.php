@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Adress_shippings', function (Blueprint $table) {
+        Schema::create('address_shippings', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('number', 10,2);
-            $table->string('street',20);
-            $table->string('neighborhood', 20 );
-            $table->string('city', 20);
-            $table->string('reference_location',30);
-            $table->string('state_address',30);
-            
-            $table->integer("customer_id")->unsigned();
-            $table->foreign("customer_id")->references("id")->on("customers")->onDelete("cascade")->onUpdate("cascade");
-
-            $table->timestamps();
+            $table->string('number', 50)->nullable();
+            $table->string('street', 100);
+            $table->string('neighborhood', 100);
+            $table->string('city', 100);
+            $table->string('reference_location', 255)->nullable();
+            $table->string('state_address', 50)->default('activo');
+        
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+    $table->timestamps();
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shipping_addresses');
+        Schema::dropIfExists('address_shippings');
     }
 };

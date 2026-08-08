@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class Address_shippingRequest extends FormRequest
+
+class AddressShippingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,56 +18,43 @@ class Address_shippingRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'customer_id'=>"required",
-            'number'=>"decimal|required",
-            'street'=>"string|required||min:3|max:20",
-            'neighborhood'=>"string|required||min:3|max:20",
-            'city'=>"string|required||min:3|max:20",
-            'reference_location'=>"string|required||min:3|max:30",
-            'state_address'=>"string|required||min:3|max:20",
-
+            'customer_id'        => 'required|exists:customers,id',
+            'number'             => 'nullable|string|max:50',
+            'street'             => 'required|string|min:3|max:100',
+            'neighborhood'       => 'required|string|min:3|max:100',
+            'city'               => 'required|string|min:3|max:100',
+            'reference_location' => 'nullable|string|max:255',
+            'state_address'      => 'required|string|in:activo,inactivo',
         ];
     }
 
-    public function messages():array
+    /**
+     * Custom message for validation errors.
+     */
+    public function messages(): array
     {
-        return[
-            'customer_id.required'=>'El campo es requerido',
+        return [
+            'customer_id.required' => 'Debe seleccionar un cliente.',
+            'customer_id.exists'   => 'El cliente seleccionado no existe en la base de datos.',
 
-            'number.decimal'=>'El campo permite numeros',
-            'number.required'=>'El campo es requerido',
+            'street.required'      => 'La calle es obligatoria.',
+            'street.min'           => 'La calle debe tener al menos 3 caracteres.',
+            'street.max'           => 'La calle no puede exceder los 100 caracteres.',
 
-            'street.string'=>'El nombre de la calle solo permite caracteres',
-            'street.required'=>'El campo es requerido',
-            'street.min'=>'El minimo de caracteres es 3',
-            'street.max'=>'El maximo de caracteres es 20',
+            'neighborhood.required' => 'El barrio/colonia es obligatorio.',
+            'neighborhood.min'      => 'El barrio debe tener al menos 3 caracteres.',
+            'neighborhood.max'      => 'El barrio no puede exceder los 100 caracteres.',
 
-            'neighborhood.string'=>'El nombre del barrio solo permite caracteres',
-            'neighborhood.required'=>'El campo es requerido',
-            'neighborhood.min'=>'El minimo de caracteres es 3',
-            'neighborhood.max'=>'El maximo de caracteres es 20',
+            'city.required'        => 'La ciudad es obligatoria.',
+            'city.min'             => 'La ciudad debe tener al menos 3 caracteres.',
+            'city.max'             => 'La ciudad no puede exceder los 100 caracteres.',
 
-            'city.string'=>'El nombre de la ciudad solo permite caracteres',
-            'city.required'=>'El campo es requerido',
-            'city.min'=>'El minimo de caractesres es 3',
-            'city.max'=>'El maximo de caracteres es 20',
-
-            'reference_location.string'=>'La refencia de ubicacion solo permite caracteres',
-            'reference_location.required'=>'El campo es requerido',
-            'reference_location.min'=>'El minimo de caractesres es 3',
-            'reference_location.max'=>'El maximo de caracteres es 30',
-
-            'state_address.string'=>'El estado de la direccion solo permite caracteres',
-            'state_address.required'=>'El campo es requerido',
-            'state_address.min'=>'El minimo de caractesres es 3',
-            'state_address.max'=>'El maximo de caracteres es 20',
-
+            'state_address.required' => 'El estado de la dirección es obligatorio.',
+            'state_address.in'       => 'El estado debe ser activo o inactivo.',
         ];
     }
 }

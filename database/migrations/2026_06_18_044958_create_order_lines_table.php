@@ -17,6 +17,10 @@ return new class extends Migration
             $table->decimal('price');
             $table->decimal('subtotal_line',10,2);
 
+
+            $table->integer('order_id')->unsigned();
+            $table->foreign('orders_id')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
+
             $table->integer('articles_id')->unsigned();
             $table->foreign('articles_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

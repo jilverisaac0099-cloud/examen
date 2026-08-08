@@ -22,8 +22,8 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function address_shippings()
+    public function Address_shippings()
     {
-        return $this->hasMany(Address_shipping::class);
+        return $this->hasMany(AddressShipping::class);
     }
 }

@@ -5,18 +5,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FactoryController;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\Address_shippingController;
+use App\Http\Controllers\AddressShippingController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Order_lineController;
-use App\Http\Controllers\Factory_articleController;
+use App\Http\Controllers\OrderLineController;
+use App\Http\Controllers\FactoryArticleController;
 
-
-Route::get('/', action: function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth', 'verified',])->group(function() {
-    
+Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -25,12 +23,10 @@ Route::middleware(['auth', 'verified',])->group(function() {
 Route::resource('customers', CustomerController::class);
 Route::resource('factories', FactoryController::class);
 Route::resource('articles', ArticleController::class);
-Route::resource('address_shippings', Address_shippingController::class);
+Route::resource('address_shippings', AddressShippingController::class);
 Route::resource('orders', OrderController::class);
-Route::resource('order_lines', Order_lineController::class);
-Route::resource('factory_articles', Factory_articleController::class);
-
-
+Route::resource('order_lines', OrderLineController::class);
+Route::resource('factory_articles', FactoryArticleController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

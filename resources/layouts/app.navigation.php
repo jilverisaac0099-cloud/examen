@@ -24,7 +24,7 @@
                         {{ __('Artículos') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('address_shippings.index')" :active="request()->routeIs('address_shippings.*')">
+                    <x-nav-link :href="route('addressshippings.index')" :active="request()->routeIs('addressshippings.*')">
                         {{ __('Direcciones de Envío') }}
                     </x-nav-link>
 

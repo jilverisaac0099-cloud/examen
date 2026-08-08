@@ -20,7 +20,11 @@
                             <tr class="bg-gray-50/50 border-b border-gray-100">
                                 <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider w-16">#</th>
                                 <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Nombre</th>
-                                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Descripción</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Cédula</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Teléfono</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Correo</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Dirección</th>
+                                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Estado</th>
                                 <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Acciones</th>
                             </tr>
                         </thead>
@@ -37,34 +41,29 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-600 max-w-xs truncate">
-                                            {{ $factory->identification_number ?? 'Sin cedula de identidad' }}
+                                            {{ $factory->identification_card ?? 'Sin cedula de identidad' }}
                                         </div>
                                     </td>
-
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-600 max-w-xs truncate">
                                             {{ $factory->telephone ?? 'Sin telefono' }}
                                         </div>
                                     </td>
-
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-600 max-w-xs truncate">
                                             {{ $factory->email ?? 'Sin email' }}
                                         </div>
                                     </td>
-
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-600 max-w-xs truncate">
                                             {{ $factory->address ?? 'Sin dirección' }}
                                         </div>
                                     </td>
-
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-600 max-w-xs truncate">
-                                            {{ $factory->suppier_status?? 'Sin estado de proveedor' }}
+                                            {{ $factory->state_supplier ?? 'Sin estado' }}
                                         </div>
                                     </td>
-
 
                                     <td class="px-6 py-4 text-right">
                                         <div class="flex justify-end items-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -73,7 +72,8 @@
                                             </a>
                                             <a href="{{ route('factories.edit', $factory) }}" class="text-gray-400 hover:text-amber-500 transition-colors" title="Editar">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                                            
+                                            </a>
+
                                             <form action="{{ route('factories.destroy', $factory) }}" method="POST" class="inline" id="form-delete-{{ $factory->id }}">
                                                 @csrf
                                                 @method('DELETE')
@@ -86,10 +86,10 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-6 py-12 text-center">
+                                    <td colspan="8" class="px-6 py-12 text-center">
                                         <div class="flex flex-col items-center">
                                             <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                                            <p class="text-gray-500 text-lg font-medium">No hay categorías registradas</p>
+                                            <p class="text-gray-500 text-lg font-medium">No hay fábricas registradas</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function confirmarEliminacion(id) {
             Swal.fire({

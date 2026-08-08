@@ -26,9 +26,9 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="identification_number" class="block text-sm font-medium text-gray-700 mb-2">Cedula de Identificación</label>
-                        <input type="text" id="identification_number" name="identification_number" value="{{ old('identification_number') }}" maxlength="20" class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors" placeholder="Ej. 123456789">
-                        @error('identification_number')
+                        <label for="identification_card" class="block text-sm font-medium text-gray-700 mb-2">Cedula de Identificación</label>
+                        <input type="text" id="identification_card" name="identification_card" value="{{ old('identification_card') }}" maxlength="20" class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors" placeholder="Ej. 123456789">
+                        @error('identification_card')
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
@@ -58,8 +58,8 @@
                     </div>
 
                     <div class="mb-6">
-                        <label for="supplier_status" class="block text-sm font-medium text-gray-700 mb-2">Estado del Proveedor</label>
-                        <select id="supplier_status" name="supplier_status" class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors">
+                        <label for="state_supplier" class="block text-sm font-medium text-gray-700 mb-2">Estado del Proveedor</label>
+                        <select id="state_suplier" name="state_supplier" class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-20 shadow-sm transition-colors">
                             <option value="activo" {{ old('state_supplier') === 'activo' ? 'selected' : '' }}>Activo</option>
                             <option value="inactivo" {{ old('state_supplier') === 'inactivo' ? 'selected' : '' }}>Inactivo</option>
                         </select>

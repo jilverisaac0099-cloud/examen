@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Order;
 use App\Http\Requests\OrderRequest;
 use App\Models\Customer;
@@ -18,7 +17,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::with("customer")->get();
+    
+        $orders = Order::with("customer")->paginate(10);
         return view("orders.index", compact("orders"));
     }
     
@@ -30,8 +30,8 @@ class OrderController extends Controller
         $order = new Order();
         $customers = Customer::all();
         
-        // CORRECCIÓN: Cambiado a $addresses para que coincida con la vista
-        $addresses = Address_shipping::all(); 
+        
+        $addresses = AddresShipping::all();
         
         return view('orders.create', compact('order', 'customers', 'addresses'));
     }
@@ -43,7 +43,6 @@ class OrderController extends Controller
     {
         Order::create($request->validated());
         
-        // Mensaje con ortografía corregida
         return redirect()->route('orders.index')->with('success', 'La orden ha sido creada correctamente.');
     }
 
@@ -64,8 +63,8 @@ class OrderController extends Controller
         $order = Order::with('customer')->findOrFail($id);
         $customers = Customer::all();
         
-        // CORRECCIÓN: Cambiado a $addresses para que coincida con la vista
-        $addresses = Address_shipping::all(); 
+        
+        $addresses = Addressshipping::all();
         
         return view('orders.edit', compact('order', 'customers', 'addresses'));
     }
@@ -78,7 +77,6 @@ class OrderController extends Controller
         $order = Order::with('customer')->findOrFail($id);
         $order->update($request->validated());
         
-        // Mensaje con ortografía corregida
         return redirect()->route('orders.index')->with('success', 'La orden ha sido actualizada correctamente.');
     }
     
@@ -90,7 +88,7 @@ class OrderController extends Controller
         $order = Order::with('customer')->findOrFail($id);
         $order->delete();
         
-        // Mensaje con ortografía corregida
         return redirect()->route('orders.index')->with('success', 'La orden ha sido eliminada correctamente.');
     }
 }
+
